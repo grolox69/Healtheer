@@ -1,6 +1,7 @@
 import { PureComponent } from 'react'
-import Layout from '../components/layout'
-import withSession from "../util/Auth/withSession";
+import Layout from '../../components/layout'
+import withSession from "../../util/Auth/withSession";
+import privateRoute from "../../util/Auth/privateRoute"
 
 export class Dashboard extends PureComponent {
   render() {
@@ -13,4 +14,4 @@ export class Dashboard extends PureComponent {
   }
 }
 
-export default withSession(Dashboard);
+export default privateRoute(withSession(Dashboard), { pathAfterFailure: '/' });

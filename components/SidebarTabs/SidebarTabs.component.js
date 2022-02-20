@@ -5,6 +5,8 @@ import {
     HomeIcon,
     UserGroupIcon,
 } from '@heroicons/react/outline';
+import { withRouter } from 'next/router'
+import Link from 'next/link';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -12,33 +14,37 @@ function classNames(...classes) {
 
 export class SidebarTabs extends PureComponent {
     navigation = [
-        { name: 'Home', href: '#', icon: HomeIcon, current: true },
-        { name: 'Patients', href: '#', icon: UserGroupIcon, current: false },
-        { name: 'Reports', href: '#', icon: DocumentReportIcon, current: false },
-        { name: 'History', href: '#', icon: ClockIcon, current: false },
+        { name: 'Home', href: '/dashboard', icon: HomeIcon },
+        { name: 'Patients', href: '/patients', icon: UserGroupIcon},
+        { name: 'Reports', href: '#', icon: DocumentReportIcon},
+        { name: 'History', href: '#', icon: ClockIcon},
     ]
 
     renderMobileTabs() {
+        const { router } = this.props;
         return (
             <nav
                 className="mt-5 px-2 space-y-1"
                 aria-label="Sidebar"
             >
                 <div className="px-2 space-y-1">
-                    {this.navigation.map((item) => (
-                        <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                            item.current ? 'bg-[#FFE7FF] text-[#986A9E]' : 'text-white hover:text-white hover:bg-[#4BBDB7]',
-                            'group flex items-center px-2 py-2 text-base font-medium rounded-md'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
+                    {this.navigation.map((item) => {(
+                        <Link
+                            href={item.href}
+                            key={item.name}
                         >
-                            <item.icon className={classNames(item.current ? 'text-[#986A9E]' : 'text-white','mr-4 flex-shrink-0 h-6 w-6')} aria-hidden="true" />
-                            {item.name}
-                        </a>
-                    ))}
+                            <a
+                                className={classNames(
+                                    item.href === router.pathname ? 'bg-[#FFE7FF] text-[#986A9E]' : 'text-white hover:text-white hover:bg-[#4BBDB7]',
+                                    'group flex items-center px-2 py-2 text-base font-medium rounded-md'
+                                )}
+                                aria-current={item.href === router.pathname ? 'page' : undefined}
+                            >
+                                <item.icon className={classNames(item.href === router.pathname ? 'text-[#986A9E]' : 'text-white','mr-4 flex-shrink-0 h-6 w-6')} aria-hidden="true" />
+                                {item.name}
+                            </a>
+                        </Link>
+                    )})}
                 </div>
                 
             </nav>
@@ -46,6 +52,8 @@ export class SidebarTabs extends PureComponent {
     }
 
     renderDesktopTabs() {
+        const { router } = this.props;
+
         return (
             <nav 
                 className="mt-5 flex-1 flex flex-col overflow-y-auto" 
@@ -53,18 +61,21 @@ export class SidebarTabs extends PureComponent {
             >
                 <div className="px-2 space-y-1">
                     {this.navigation.map((item) => (
-                        <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                            item.current ? 'bg-[#FFE7FF] text-[#986A9E]' : 'text-white hover:text-white hover:bg-[#4BBDB7]',
-                            'group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
+                        <Link
+                            href={item.href}
+                            key={item.name}
                         >
-                            <item.icon className={classNames(item.current ? 'text-[#986A9E]' : 'text-white','mr-4 flex-shrink-0 h-6 w-6')} aria-hidden="true" />
-                            {item.name}
-                        </a>
+                            <a
+                            className={classNames(
+                                item.href === router.pathname ? 'bg-[#FFE7FF] text-[#986A9E]' : 'text-white hover:text-white hover:bg-[#4BBDB7]',
+                                'group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md'
+                            )}
+                            aria-current={item.href === router.pathname ? 'page' : undefined}
+                            >
+                                <item.icon className={classNames(item.href === router.pathname ? 'text-[#986A9E]' : 'text-white','mr-4 flex-shrink-0 h-6 w-6')} aria-hidden="true" />
+                                {item.name}
+                            </a>
+                        </Link>
                     ))}
                 </div>
             </nav>
@@ -80,4 +91,4 @@ export class SidebarTabs extends PureComponent {
     }
 }
 
-export default SidebarTabs;
+export default withRouter(SidebarTabs);
