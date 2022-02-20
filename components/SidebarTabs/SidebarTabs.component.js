@@ -28,7 +28,7 @@ export class SidebarTabs extends PureComponent {
                 aria-label="Sidebar"
             >
                 <div className="px-2 space-y-1">
-                    {this.navigation.map((item) => {(
+                    {this.navigation.map((item) => (
                         <Link
                             href={item.href}
                             key={item.name}
@@ -44,7 +44,7 @@ export class SidebarTabs extends PureComponent {
                                 {item.name}
                             </a>
                         </Link>
-                    )})}
+                    ))}
                 </div>
                 
             </nav>
