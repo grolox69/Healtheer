@@ -1,11 +1,30 @@
-import { createStore } from "redux";
-import reducer from "../../store";
+import { createStore, applyMiddleware } from "redux";
+import { HYDRATE } from 'next-redux-wrapper'
+import combinedReducer from "../../store";
 
-const store =  createStore(reducer, 
-    typeof window === "object" && 
-    typeof window.__REDUX_DEVTOOLS_EXTENSION__ != "undefined"
-    ? window.__REDUX_DEVTOOLS_EXTENSION__()
-    : (f) => f
-);
+const bindDevtools = () => {
+    if (process.env.NODE_ENV !== 'production') {
+      const { composeWithDevTools } = require('redux-devtools-extension')
+      return composeWithDevTools();
+    }
+    return;
+}
 
-export default store;
+const reducer = (state, action) => {
+    if (action.type === HYDRATE) {
+        const nextState = {
+          ...state, // use previous state
+          ...action.payload, // apply delta from hydration
+        }
+        
+        return nextState
+    } else {
+        return combinedReducer(state, action)
+    }
+}
+
+export const getStore = () => {
+    return createStore(reducer, bindDevtools())
+};
+
+export default getStore;

@@ -12,7 +12,7 @@ export default function Layout({ children }) {
             <Sidebar />
             <div className="lg:pl-64 flex flex-col flex-1 ">
                 <Header />
-                <main className="container flex-1 pb-8 p-6">
+                <main className="flex-1 p-6">
                     { children }
                 </main>
             </div>

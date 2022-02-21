@@ -6,23 +6,23 @@ import Loader from "../../../components/Loader";
 const publicRoute = (Component = null, options = {}) => {
     class PublicRoute extends React.Component {
         state = {
-            loading: true,
+            isLoading: true,
         };
 
         async componentDidMount() {
             const session = await getSession()
             
             if (!session) {
-                this.setState({ loading: false });
+                this.setState({ isLoading: false });
             } else {
                 Router.push(options.pathAfterFailure || "/dashboard");
             }
         }
       
         render() {
-            const { loading } = this.state;
+            const { isLoading } = this.state;
 
-            if (loading) {
+            if (isLoading) {
                 return <Loader />;
             }
         

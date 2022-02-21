@@ -8,11 +8,11 @@ export const closeMobileSidebar = (sidebarOpen) => {
         type: "CLOSE_MOBILE_SIDEBAR",
         payload: sidebarOpen
     }
-}
+};
 
 export const openMobileSidebar = (sidebarOpen) => {
     return {
         type: "OPEN_MOBILE_SIDEBAR",
         payload: sidebarOpen
     }
-}
+};

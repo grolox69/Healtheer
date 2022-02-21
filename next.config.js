@@ -3,7 +3,8 @@ module.exports = {
   images: {
     domains: [
       'images.unsplash.com',
-      'tailwindui.com'
+      'tailwindui.com',
+      'lh3.googleusercontent.com'
     ],
   },
 }

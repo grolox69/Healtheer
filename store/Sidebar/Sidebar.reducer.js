@@ -3,11 +3,11 @@ import {
     OPEN_MOBILE_SIDEBAR
 } from './Sidebar.action';
 
-const initialState = {
+export const getInitialState = () => ({
     sidebarOpen : false
-}
+});
 
-export default function SidebarReducer(state = initialState, action) {
+export default function SidebarReducer(state = getInitialState(), action) {
     switch (action.type) {
         case CLOSE_MOBILE_SIDEBAR:
             return {
@@ -20,4 +20,4 @@ export default function SidebarReducer(state = initialState, action) {
         default:
             return state;
     }
-}
+};
