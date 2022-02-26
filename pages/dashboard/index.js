@@ -3,6 +3,7 @@ import Layout from '../../components/layout'
 import privateRoute from "../../util/Auth/privateRoute"
 
 import DashboardHeading from '../../components/DashboardHeading';
+import MonitorCard from '../../components/MonitorCard';
 
 export class Dashboard extends PureComponent {
   render() {
@@ -11,6 +12,7 @@ export class Dashboard extends PureComponent {
     return (
       <Layout>
         <DashboardHeading name={session.user.name} imageUrl={session.user.image} />
+        
       </Layout>
     )
   }

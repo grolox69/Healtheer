@@ -1,54 +1,161 @@
 import { PureComponent } from "react";
-const user = {
-    name: 'Rebecca Nicholas',
-    role: 'Product Designer',
-    imageUrl:
-      'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
-const stats = [
-    { label: 'Vacation days left', value: 12 },
-    { label: 'Sick days left', value: 4 },
-    { label: 'Personal days left', value: 2 },
-]
-
 
 export class Test extends PureComponent {
+
     render() {
-        return (
-            <div className="rounded-lg bg-white overflow-hidden shadow">
-                <h2 className="sr-only" id="profile-overview-title">
-                    Profile Overview
-                </h2>
-                <div className="bg-white p-6">
-                    <div className="sm:flex sm:items-center sm:justify-between">
-                    <div className="sm:flex sm:space-x-5">
-                        <div className="flex-shrink-0">
-                        <img className="mx-auto h-20 w-20 rounded-full" src={user.imageUrl} alt="" />
+        return ( 
+            <form className="space-y-8 divide-y divide-gray-200 m-2">
+                <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+                    <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+                        <div>
+                            <h3 className="text-lg leading-6 font-medium text-gray-900">Personal Information</h3>
+                            <p className="mt-1 max-w-2xl text-sm text-gray-500">This information will be displayed publicly so be careful what you share.</p>
                         </div>
-                        <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
-                        <p className="text-sm font-medium text-gray-600">Welcome back,</p>
-                        <p className="text-xl font-bold text-gray-900 sm:text-2xl">{user.name}</p>
-                        <p className="text-sm font-medium text-gray-600">{user.role}</p>
+                        <div className="space-y-6 sm:space-y-5">
+
+                            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                <label htmlFor="first-name" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                    First name
+                                </label>
+                                <div className="mt-1 sm:mt-0 sm:col-span-2">
+                                    <input
+                                    type="text"
+                                    name="first-name"
+                                    id="first-name"
+                                    autoComplete="given-name"
+                                    className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                                    />
+                                </div>
+                            </div>
+
+                        <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                            <label htmlFor="last-name" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                Last name
+                            </label>
+                            <div className="mt-1 sm:mt-0 sm:col-span-2">
+                                <input
+                                type="text"
+                                name="last-name"
+                                id="last-name"
+                                autoComplete="family-name"
+                                className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                Email address
+                            </label>
+                            <div className="mt-1 sm:mt-0 sm:col-span-2">
+                                <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                autoComplete="email"
+                                className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                            <label htmlFor="country" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                Country
+                            </label>
+                            <div className="mt-1 sm:mt-0 sm:col-span-2">
+                                <select
+                                id="country"
+                                name="country"
+                                autoComplete="country-name"
+                                className="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                                >
+                                <option>United States</option>
+                                <option>Canada</option>
+                                <option>Mexico</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                            <label htmlFor="street-address" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                Street address
+                            </label>
+                            <div className="mt-1 sm:mt-0 sm:col-span-2">
+                                <input
+                                type="text"
+                                name="street-address"
+                                id="street-address"
+                                autoComplete="street-address"
+                                className="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                            <label htmlFor="city" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                City
+                            </label>
+                            <div className="mt-1 sm:mt-0 sm:col-span-2">
+                                <input
+                                type="text"
+                                name="city"
+                                id="city"
+                                autoComplete="address-level2"
+                                className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                            <label htmlFor="region" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                State / Province
+                            </label>
+                            <div className="mt-1 sm:mt-0 sm:col-span-2">
+                                <input
+                                type="text"
+                                name="region"
+                                id="region"
+                                autoComplete="address-level1"
+                                className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                            <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                ZIP / Postal code
+                            </label>
+                            <div className="mt-1 sm:mt-0 sm:col-span-2">
+                                <input
+                                type="text"
+                                name="postal-code"
+                                id="postal-code"
+                                autoComplete="postal-code"
+                                className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div className="mt-5 flex justify-center sm:mt-0">
-                        <a
-                        href="#"
-                        className="flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                </div>
+                </div>
+
+                <div className="pt-5">
+                    <div className="flex justify-end">
+                        <button
+                            type="button"
+                            className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                        View profile
-                        </a>
-                    </div>
+                            Cancel
+                        </button>
+                        <button
+                            type="submit"
+                            className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        >
+                            Save
+                        </button>
                     </div>
                 </div>
-                <div className="border-t border-gray-200 bg-gray-50 grid grid-cols-1 divide-y divide-gray-200 sm:grid-cols-3 sm:divide-y-0 sm:divide-x">
-                    {stats.map((stat) => (
-                    <div key={stat.label} className="px-6 py-5 text-sm font-medium text-center">
-                        <span className="text-gray-900">{stat.value}</span> <span className="text-gray-600">{stat.label}</span>
-                    </div>
-                    ))}
-                </div>
-                </div>
+            </form>
         )
     }
 }

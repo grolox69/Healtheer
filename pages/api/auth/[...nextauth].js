@@ -23,8 +23,9 @@ export default NextAuth({
     })
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      return true
+    async session({ session, user }) {
+      session.user = user
+      return session
     },
   }
 })
