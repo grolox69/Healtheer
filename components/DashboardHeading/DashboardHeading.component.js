@@ -13,7 +13,7 @@ export class DashboardHeading extends PureComponent {
                 <div className="bg-white p-6">
                     <div className="sm:flex sm:items-center sm:justify-between">
                         <div className="sm:flex sm:space-x-5">
-                            <div className="flex-shrink-0">
+                            <div className="flex flex-shrink-0 justify-center">
                                 <Image 
                                     className="mx-auto h-20 w-20 rounded-full" 
                                     src={imageUrl} 
