@@ -7,9 +7,12 @@ export class Test extends PureComponent {
 
     render() {
         return ( 
-            <Modal>
-                <PatientForm />  
-            </Modal>
+            <>
+                <Modal>
+                    <PatientForm />  
+                </Modal>
+                <AddPatient />
+            </>
         )
     }
 }

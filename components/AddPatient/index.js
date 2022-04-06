@@ -1,1 +1,1 @@
-export { default } from './AddPatient.component';
+export { default } from './AddPatient.container';

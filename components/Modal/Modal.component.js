@@ -5,17 +5,7 @@ import { XIcon } from '@heroicons/react/outline'
 
 export class Modal extends PureComponent {
 
-    state = {
-        isOpen: true
-    }
-
     cancelButtonRef = createRef();
-
-    setIsOpen(isOpen) {
-        this.setState({
-            isOpen: isOpen
-        })
-    }
 
     renderModalBackground() {
         return <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
@@ -38,9 +28,11 @@ export class Modal extends PureComponent {
     }
 
     renderCloseButton() {
+        const { closeModal } = this.props;
+
         return (
             <button
-                onClick={() => this.setIsOpen(false)}
+                onClick={closeModal}
                 className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
             >
                 <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -84,11 +76,11 @@ export class Modal extends PureComponent {
     }
 
     render() {
-        const { isOpen } = this.state;
+        const { modalOpen, closeModal } = this.props;
 
         return (
-            <Transition.Root show={isOpen} as={Fragment}>
-                <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={this.cancelButtonRef} onClose={() => this.setIsOpen(false)}>
+            <Transition.Root show={modalOpen} as={Fragment}>
+                <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={this.cancelButtonRef} onClose={closeModal}>
                     <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                         {this.renderModalBackgroundWithAnimation()}
                         {/* This element is to trick the browser into centering the modal contents. */}

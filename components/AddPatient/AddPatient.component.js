@@ -1,6 +1,5 @@
 import { PureComponent } from 'react'
 import { PlusSmIcon as PlusSmIconOutline } from '@heroicons/react/outline'
-import Link from 'next/link'
 
 export class AddPatient extends PureComponent {
 
@@ -9,17 +8,14 @@ export class AddPatient extends PureComponent {
     }
 
     renderAddButton() {
+        const { openModal } = this.props;
+        
         return (
             <button
                 className="fixed float-right bottom-10 right-14 items-center p-3 border border-transparent rounded-full shadow-sm text-white bg-[#643A6A] hover:bg-[#9a3aa7] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={openModal}
             >   
-                <Link
-                    href="/patients/create"
-                >
-                    <a>
-                        {this.renderPlusIcon()}
-                    </a>
-                </Link>
+                {this.renderPlusIcon()}    
             </button>
         )
     }
