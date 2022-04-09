@@ -1,6 +1,9 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-export const addressSchema = new mongoose.Schema({
+export const addressSchema = {
+    _id : {
+        id: false
+    },
     country: {
         type: String,
         required: true
@@ -15,9 +18,9 @@ export const addressSchema = new mongoose.Schema({
     appartment: {
         type: String
     }
-})
+}
 
-export const patientSchema = mongoose.Schema({
+export const patientSchema = new mongoose.Schema({
     fullName: {
         type: String,
         required: true
@@ -36,10 +39,12 @@ export const patientSchema = mongoose.Schema({
     },
     address: {
         type: addressSchema
-    }
+    },
+    doctors: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }]
 })
-
-console.log("models", mongoose.models);
 
 const Patient = mongoose.models.Patient || mongoose.model("Patient", patientSchema);
 

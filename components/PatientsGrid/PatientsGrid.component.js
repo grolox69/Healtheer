@@ -1,7 +1,7 @@
 import { PureComponent } from "react";
 import PatientCard from "../PatientCard";
 
-const patients = [
+const patientsTest = [
     {
       name: 'Jane Cooper',
       title: 'Paradigm Representative',
@@ -33,16 +33,43 @@ const patients = [
 ]
 
 export class PatientsGrid extends PureComponent {
-    render() {
+
+    renderNoPatients() {
+        return (
+            <span className="text-lg font-normal">
+                You currently dont have any patient to monitor. Please search or add your patients
+            </span>
+        )
+    }
+
+    renderPatients() {
+        const { patients } = this.props
+        console.log(patients)
+        return (
+            patients.map((patient, id) => {
+                return (
+                    <PatientCard key={id} patient={patient} />
+                )
+            })
+        )
+    }
+
+    renderPatientsGrid() {
         return (
             <div role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                {patients.map((patient, id) => {
-                    return (
-                        <PatientCard key={id} patient={patient} />
-                    )
-                })}
+                { this.renderPatients() }
             </div>
         )
+    }
+
+    render() {
+        const { patients } = this.props
+
+        if (patients === undefined || patients.length == 0) {
+            return this.renderNoPatients()
+        }
+
+        return this.renderPatientsGrid()
     }
 }
 

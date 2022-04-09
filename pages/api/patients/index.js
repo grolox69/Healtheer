@@ -1,15 +1,19 @@
 import { createHandler } from "../../../util/ConnectHandler/createHandler";
 import isAuthed from "../../../middleware/isAuthed";
 
+import { 
+    getPatients,
+    addPatient
+} from "../../../controllers/patientController"
+
+// @route /api/patients
+// @desc GET user's patients
+// @access Private
+
 const handler = createHandler([isAuthed]);
 
 handler
-.get((req, res) => {
-    console.log("Logged in User id", req.userId)
-    res.json({msg: "get"})
-})
-.post((req, res) => {
-    res.json({ msg: 'ADD NEW PATIENT' })
-})
+.get(getPatients)
+.post(addPatient)
 
 export default handler;

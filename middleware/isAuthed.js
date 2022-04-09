@@ -1,5 +1,4 @@
 import { getSession } from "next-auth/react"
-import User from "../models/userModel"
 
 async function isAuthed(req, res, next) {
     const session = await getSession({ req })
@@ -7,8 +6,7 @@ async function isAuthed(req, res, next) {
     if (session) {
         // Signed in
         try {
-            const currentUser = await User.findById(session.user.id);
-            req.userId = currentUser._id;
+            req.userId = session.user.id;
             return next();
         } catch(e) {
             res.status(500).json({ message: "Internal Server Error. Couldn't fetch User." });

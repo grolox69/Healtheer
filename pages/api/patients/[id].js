@@ -1,22 +1,17 @@
-import nc from 'next-connect'
+import { createHandler } from "../../../util/ConnectHandler/createHandler";
+import isAuthed from "../../../middleware/isAuthed";
 
-const handler = nc({
-    onError: (err, req, res, next) => {
-        console.error(err.stack);
-        res.status(500).end("Internal server error. Please try again later!");
-    },
-    onNoMatch: (req, res) => {
-        res.status(404).end("Page not found");
-    },
-})
+// @route /api/patients/:id
+// @desc GET, UPDATE, DELETE patient
+// @access Private
+
+const handler = createHandler([isAuthed]);
+
+handler
 .get((req, res) => {
-    res.json({ msg: 'GET PATIENT' })
+    
 })
-.patch((req, res) => {
-    res.json({ msg: 'UPDATE PATIENT' })
-})
-.delete((req, res) => {
-    res.json({ msg: 'DELETE PATIENT' })
+.post((req, res) => {
 })
 
-export default handler
+export default handler;

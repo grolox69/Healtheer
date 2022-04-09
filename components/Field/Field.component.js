@@ -35,6 +35,7 @@ export class Field extends PureComponent {
                 {...register(attr.name, {...validationRule})}
                 { ...attr }
                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                autoComplete
             />
         );
     }
@@ -119,19 +120,31 @@ export class Field extends PureComponent {
         );
     }
 
+    renderRequired() {
+        const { validationRule: { required } = {} } = this.props;
+        
+        if (!required) {
+            return null;
+        }
+
+        return " * "
+    }
+
     // Text/Labels RENDER
     renderLabel() {
-        const { type, label, attr: { name } = {} } = this.props;
+        const { type, label, attr: { name } = {}, validationRule: { required } = {} } = this.props;
 
         if (!label) {
             return null;
         }
 
         return (
-            // move style to the page's specific inside attributes
-            <label htmlFor={ name || `input-${type}` } className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                { label }
-            </label>
+            <>
+                <label htmlFor={ name || `input-${type}` } className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                    { label }
+                    {this.renderRequired()}
+                </label>
+            </>
         );
     }
 

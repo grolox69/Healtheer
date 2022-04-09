@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-export const userSchema = mongoose.Schema({
+export const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -15,7 +15,7 @@ export const userSchema = mongoose.Schema({
     },
     emailVerified: {
         type: Date || null,
-        required: true
+        required: false,
     },
     patients: [{
         type: Schema.Types.ObjectId,

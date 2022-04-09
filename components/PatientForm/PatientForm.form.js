@@ -1,4 +1,5 @@
-import FIELD_TYPE from '../Field/Field.config';
+import FIELD_TYPE from "../Field/Field.config";
+import getCountries from "../../util/Countries/listOfCountries";
  
 export const patientInformationFields = (props) => {
     
@@ -19,63 +20,63 @@ export const patientInformationFields = (props) => {
  
     return [
         {
-            title: 'Personal Information',
-            subTitle: 'This information will be displayed publicly so be careful what you share.',
+            title: "Personal Information",
+            subTitle: "This information will be displayed publicly so be careful what you share.",
             fields: [
                 {
                     type: FIELD_TYPE.text,
-                    label: 'Full name',
+                    label: "Full name",
                     attr: {
-                        name: 'fullName',
+                        name: "fullName",
                         defaultValue: fullName,
-                        placeholder: 'Your full name'
+                        placeholder: "Patient's full name"
                     },
-                    validateOn: ['onChange'],
+                    validateOn: ["onChange"],
                     validationRule: {
                         required: "This field is required"
                     }
                 },
                 {
                     type: FIELD_TYPE.email,
-                    label: 'Emergency Email address',
+                    label: "Emergency Email address",
                     attr: {
-                        name: 'emergencyEmail',
+                        name: "emergencyEmail",
                         defaultValue: emergencyEmail,
-                        placeholder: 'Your emergency email address'
+                        placeholder: "Patient's emergency email address"
                     },
                     
-                    validateOn: ['onChange'],
+                    validateOn: ["onChange"],
                     validationRule: {
                         required: "This field is required",
                         pattern: {
                             value: /(.+)@(.+){2,}\.(.+){2,}/,
-                            message: 'Please enter a valid email address' 
+                            message: "Please enter a valid email address" 
                         }
                     }
                 },
                 {
                     type: FIELD_TYPE.date,
-                    label: 'Date of Birth',
+                    label: "Date of Birth",
                     attr: {
-                        name: 'dateOfBirth',
+                        name: "dateOfBirth",
                         defaultValue: dateOfBirth,
-                        placeholder: 'Your date of birth (mm/dd/yyyy)'
+                        placeholder: "Patient's date of birth (mm/dd/yyyy)"
                     },
-                    validateOn: ['onChange'],
+                    validateOn: ["onChange"],
                     validationRule: {
                         required: "This field is required"
                     }
                 },
                 {
                     type: FIELD_TYPE.select,
-                    label: 'Gender',
+                    label: "Gender",
                     attr: {
-                        name: 'gender',
+                        name: "gender",
                         defaultValue: gender,
-                        placeholder: 'Your gender'
+                        placeholder: "Patient's gender"
                     },
                     options: ["Male", "Female", "Other"],
-                    validateOn: ['onChange'],
+                    validateOn: ["onChange"],
                     validationRule: {
                         required: "This field is required"
                     }
@@ -83,121 +84,121 @@ export const patientInformationFields = (props) => {
             ]
         },
         {
-            title: 'Personal Address',
-            subTitle: 'Please fill in the right address.',
+            title: "Personal Address",
+            subTitle: "Please fill in the right address.",
             fields: [
                 {
                     type: FIELD_TYPE.select,
-                    label: 'Country',
+                    label: "Country",
                     attr: {
-                        name: 'country',
+                        name: "country",
                         defaultValue: country,
-                        placeholder: 'Your country'
+                        placeholder: "Patient's country"
                     },
-                    options: [],
-                    validateOn: ['onChange'],
+                    options: getCountries(),
+                    validateOn: ["onChange"],
                     validationRule: {
                         required: "This field is required"
                     }
                 },
                 {
                     type: FIELD_TYPE.text,
-                    label: 'City',
+                    label: "City",
                     attr: {
-                        name: 'city',
+                        name: "city",
                         defaultValue: city,
-                        placeholder: 'Your city'
+                        placeholder: "Patient's city"
                     },
-                    validateOn: ['onChange'],
+                    validateOn: ["onChange"],
                     validationRule: {
                         required: "This field is required"
                     }
                 },
                 {
                     type: FIELD_TYPE.text,
-                    label: 'Street',
+                    label: "Street",
                     attr: {
-                        name: 'street',
+                        name: "street",
                         defaultValue: street,
-                        placeholder: 'Your street'
+                        placeholder: "Patient's street"
                     },
-                    validateOn: ['onChange'],
+                    validateOn: ["onChange"],
                     validationRule: {
-                        required: "This field is required"
+                        
                     }
                 },
                 {
                     type: FIELD_TYPE.text,
-                    label: 'Appartment',
+                    label: "Appartment",
                     attr: {
-                        name: 'appartment',
+                        name: "appartment",
                         defaultValue: appartment,
-                        placeholder: 'Your appartment'
+                        placeholder: "Patient's appartment"
                     },
-                    validateOn: ['onChange'],
+                    validateOn: ["onChange"],
                     validationRule: {
-                        required: "This field is required"
+                        
                     }
                 },
             ]
         },
-        {
-            title: 'Medical Records',
-            subTitle: 'Try to be precise in what you write.',
-            fields: [
-                {
-                    type: FIELD_TYPE.text,
-                    label: 'Blood type',
-                    attr: {
-                        name: 'bloodType',
-                        defaultValue: bloodType,
-                        placeholder: 'Your blood type'
-                    },
-                    validateOn: ['onChange'],
-                    validationRule: {
-                        required: "This field is required"
-                    }
-                },
-                {
-                    type: FIELD_TYPE.text,
-                    label: 'Condition',
-                    attr: {
-                        name: 'condition',
-                        defaultValue: condition,
-                        placeholder: 'Your condition'
-                    },
-                    validateOn: ['onChange'],
-                    validationRule: {
-                        required: "This field is required"
-                    }
-                },
-                {
-                    type: FIELD_TYPE.text,
-                    label: 'History',
-                    attr: {
-                        name: 'history',
-                        defaultValue: history,
-                        placeholder: 'Your history'
-                    },
-                    validateOn: ['onChange'],
-                    validationRule: {
-                        required: "This field is required"
-                    }
-                },
-                {
-                    type: FIELD_TYPE.text,
-                    label: 'Medications',
-                    attr: {
-                        name: 'medications',
-                        defaultValue: medications,
-                        placeholder: 'Your medications'
-                    },
-                    validateOn: ['onChange'],
-                    validationRule: {
-                        required: "This field is required"
-                    }
-                },
-            ]
-        },
+        // {
+        //     title: "Medical Records",
+        //     subTitle: "Try to be precise in what you write.",
+        //     fields: [
+        //         {
+        //             type: FIELD_TYPE.text,
+        //             label: "Blood type",
+        //             attr: {
+        //                 name: "bloodType",
+        //                 defaultValue: bloodType,
+        //                 placeholder: "Patient's blood type"
+        //             },
+        //             validateOn: ["onChange"],
+        //             validationRule: {
+        //                 required: "This field is required"
+        //             }
+        //         },
+        //         {
+        //             type: FIELD_TYPE.text,
+        //             label: "Condition",
+        //             attr: {
+        //                 name: "condition",
+        //                 defaultValue: condition,
+        //                 placeholder: "Patient's condition"
+        //             },
+        //             validateOn: ["onChange"],
+        //             validationRule: {
+        //                 required: "This field is required"
+        //             }
+        //         },
+        //         {
+        //             type: FIELD_TYPE.text,
+        //             label: "History",
+        //             attr: {
+        //                 name: "history",
+        //                 defaultValue: history,
+        //                 placeholder: "Patient's history"
+        //             },
+        //             validateOn: ["onChange"],
+        //             validationRule: {
+        //                 required: "This field is required"
+        //             }
+        //         },
+        //         {
+        //             type: FIELD_TYPE.text,
+        //             label: "Medications",
+        //             attr: {
+        //                 name: "medications",
+        //                 defaultValue: medications,
+        //                 placeholder: "Patient's medications"
+        //             },
+        //             validateOn: ["onChange"],
+        //             validationRule: {
+        //                 required: "This field is required"
+        //             }
+        //         },
+        //     ]
+        // },
     ];
 };

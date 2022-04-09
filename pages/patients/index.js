@@ -10,10 +10,13 @@ import AddPatient from '../../components/AddPatient'
 import baseUrl from '../../util/baseUrl'
 
 export class Patients extends PureComponent {
+
   render() {
+    const { data: { patients } } = this.props
+
     return (
       <Layout>
-        <PatientsGrid />
+        <PatientsGrid patients={patients} />
         <Modal>
           <PatientForm />
         </Modal>
@@ -33,8 +36,8 @@ export async function getServerSideProps(context) {
   })
   
   const data = await response.json()
-
-  return { props: { } }
+  
+  return { props: { data } }
 }
 
 export default privateRoute(Patients, { pathAfterFailure: '/' });
