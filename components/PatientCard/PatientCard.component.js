@@ -40,14 +40,17 @@ export class PatientCard extends PureComponent {
     }
 
     renderDeleteButton() {
+        const { patient, deletePatient } = this.props;
+
         return (
             <div className="-ml-px w-0 flex-1 flex">
-                <a
+                <button
                     className="relative w-0 flex-1 inline-flex items-center justify-center hover:cursor-pointer py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500"
+                    onClick={() => deletePatient(patient._id)}
                 >
                     <TrashIcon className="w-5 h-5 text-gray-400" aria-hidden="true" />
                     <span className="ml-3">Delete</span>
-                </a>
+                </button>
             </div>
         )
     }

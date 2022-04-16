@@ -26,6 +26,17 @@ export const addPatient = async (req, res) => {
         });
     }).catch((e) => {
         console.error("Couldn't add Patient. ", e.stack)
-        res.status(400).send("Failed to add patient");
+        res.status(500).send("Failed to add patient");
     })
+}
+
+export const deletePatient = async (req, res) => {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(req.userId, {$pull: {patients: req.query.id}}, {new: true}).populate('patients');
+        await Patient.findByIdAndDelete(req.query.id);
+        res.status(200).json({ patients: updatedUser.patients });
+    } catch (e) {
+        console.error("Failed to delete patient ", e.stack);
+        res.status(500).send("Failed to delete patient.")
+    }
 }

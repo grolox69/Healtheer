@@ -1,1 +1,1 @@
-export { default } from "./PatientCard.component"
+export { default } from "./PatientCard.container"

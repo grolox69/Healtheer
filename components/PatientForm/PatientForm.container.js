@@ -5,6 +5,7 @@ import {
     updateLoadStatus,
     updatePatientList
 } from '../../store/PatientList/PatientList.action';
+import { toast } from 'react-toastify';
 
 import PatientForm from './PatientForm.component';
 
@@ -14,7 +15,7 @@ export const mapStateToProps = (state) => ({
 
 export const mapDispatchToProps = (dispatch) => ({
     closeModal: () => dispatch(closeModal(false)),
-    updatePatientsList: (patients) => dispatch(updatePatientList(patients)),
+    updatePatientList: (patients) => dispatch(updatePatientList(patients)),
     updateLoadStatus: (status) => dispatch(updateLoadStatus(status))
 })
 
@@ -30,7 +31,7 @@ export class PatientFormContainer extends PureComponent {
 
     async onSubmit(data) {
         const { 
-            updatePatientsList, 
+            updatePatientList, 
             updateLoadStatus,
             closeModal 
         } = this.props;
@@ -50,6 +51,7 @@ export class PatientFormContainer extends PureComponent {
         street && (patientInfo.address.appartment = appartment)
 
         try {
+            updateLoadStatus(true);
             const response = await fetch("/api/patients", {
                 body: JSON.stringify(patientInfo),
                 headers: {
@@ -57,14 +59,15 @@ export class PatientFormContainer extends PureComponent {
                 },
                 method: 'POST'
             })
-            updateLoadStatus(true);
             if (response.ok) {
                 const data = await response.json()
-                updatePatientsList(data.patients);
+                updatePatientList(data.patients);
                 closeModal();
                 updateLoadStatus(false);
+                toast.success('Patient Added!');
             } else {
-                console.log(response)
+                console.log(response);
+                toast.success('Failed to add patient!');
             }
 
         } catch(e) {
