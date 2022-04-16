@@ -1,38 +1,12 @@
 import { PureComponent } from "react";
 import PatientCard from "../PatientCard";
-
-const patientsTest = [
-    {
-      name: 'Jane Cooper',
-      title: 'Paradigm Representative',
-      role: 'Admin',
-      email: 'janecooper@example.com',
-      telephone: '+1-202-555-0170',
-      imageUrl:
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-    },
-    {
-        name: 'Jane Cooper',
-        title: 'Paradigm Representative',
-        role: 'Admin',
-        email: 'janecooper@example.com',
-        telephone: '+1-202-555-0170',
-        imageUrl:
-          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-    },
-    {
-        name: 'Jane Cooper',
-        title: 'Paradigm Representative',
-        role: 'Admin',
-        email: 'janecooper@example.com',
-        telephone: '+1-202-555-0170',
-        imageUrl:
-          'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-    },
-    
-]
+import SimpleLoader from "../SimpleLoader"
 
 export class PatientsGrid extends PureComponent {
+
+    renderLoading() {
+        return <SimpleLoader />
+    }
 
     renderNoPatients() {
         return (
@@ -43,8 +17,8 @@ export class PatientsGrid extends PureComponent {
     }
 
     renderPatients() {
-        const { patients } = this.props
-        console.log(patients)
+        const { patients } = this.props;
+
         return (
             patients.map((patient, id) => {
                 return (
@@ -63,13 +37,17 @@ export class PatientsGrid extends PureComponent {
     }
 
     render() {
-        const { patients } = this.props
-
-        if (patients === undefined || patients.length == 0) {
-            return this.renderNoPatients()
+        const { patients, isLoading } = this.props
+        
+        if (isLoading) {
+            return this.renderLoading();
         }
 
-        return this.renderPatientsGrid()
+        if (patients === undefined || patients.length == 0 && !isLoading) {
+            return this.renderNoPatients();
+        }
+
+        return this.renderPatientsGrid();
     }
 }
 

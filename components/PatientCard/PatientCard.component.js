@@ -15,7 +15,7 @@ export class PatientCard extends PureComponent {
 
         return (
             <div className="flex-1 flex flex-col p-8">
-                <img className="w-32 h-32 flex-shrink-0 mx-auto rounded-full" src="https://www.gravatar.com/avatar?d=mp" alt="" />
+                <img className="w-32 h-32 flex-shrink-0 mx-auto rounded-full" src={`https://avatars.dicebear.com/api/micah/${patient._id}.svg`} alt="Patient Avatar" />
                 <h3 className="mt-6 text-gray-900 text-sm font-medium">{patient.fullName}</h3>
                 <div className="mt-1 flex-grow flex flex-col justify-between space-y-2">
                     <p className="flex items-center justify-center text-gray-500 text-sm"><LocationMarkerIcon className="h-4 w-4 mr-1" />{`${patient.address.country}, ${patient.address.city}`}</p>

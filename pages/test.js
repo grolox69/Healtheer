@@ -1,20 +1,23 @@
 import { PureComponent } from "react";
-import Modal from '../components/Modal'
-import PatientForm from '../components/PatientForm'
-import AddPatient from '../components/AddPatient'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import SimpleLoader from "../components/SimpleLoader";
 
 export class Test extends PureComponent {
-
+    
     render() {
-        return ( 
-            <>
-                <Modal>
-                    <PatientForm />  
-                </Modal>
-                <AddPatient />
-            </>
-        )
+        
+        const notify = () => toast("Wow so easy!");
+
+        return (
+          <div>
+            <button onClick={notify}>Notify!</button>
+            <ToastContainer />
+            <SimpleLoader />
+          </div>
+        );
+           
     }
 }
 
-export default Test
+export default Test;

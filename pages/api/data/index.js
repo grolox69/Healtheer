@@ -8,7 +8,6 @@ const handler = createHandler();
 
 handler
 .post((req, res) => {
-    console.log(req.body);
     res.json({ msg: 'Felefly byeklo'})
 })
 

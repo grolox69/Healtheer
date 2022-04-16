@@ -1,6 +1,7 @@
 import { PureComponent } from 'react';
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import Link from 'next/link'
 import BrandLogo from '../BrandLogo';
 import SidebarTabs from '../SidebarTabs';
 import SidebarCloseButton from '../SidebarCloseButton';
@@ -67,7 +68,11 @@ export class Sidebar extends PureComponent {
         return (
             <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
                 <div className="flex flex-col flex-grow bg-[#643A6A] pb-4 overflow-y-auto">
-                    <BrandLogo/>
+                    <Link href="/">
+                        <a>
+                            <BrandLogo />
+                        </a>
+                    </Link>
                     <SidebarTabs isMobile={false} />
                     <LogoutButton />
                 </div>

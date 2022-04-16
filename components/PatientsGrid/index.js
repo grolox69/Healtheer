@@ -1,1 +1,1 @@
-export { default } from "./PatientsGrid.component"
+export { default } from "./PatientsGrid.container"

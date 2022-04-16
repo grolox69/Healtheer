@@ -1,15 +1,22 @@
-import { responseSymbol } from 'next/dist/server/web/spec-compliant/fetch-event';
 import { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { closeModal } from '../../store/Modal/Modal.action';
+import {
+    updateLoadStatus,
+    updatePatientList
+} from '../../store/PatientList/PatientList.action';
 
 import PatientForm from './PatientForm.component';
 
 export const mapStateToProps = (state) => ({
-    
-});
+    modalOpen: state.ModalReducer.modalOpen,
+})
 
 export const mapDispatchToProps = (dispatch) => ({
-    
-});
+    closeModal: () => dispatch(closeModal(false)),
+    updatePatientsList: (patients) => dispatch(updatePatientList(patients)),
+    updateLoadStatus: (status) => dispatch(updateLoadStatus(status))
+})
 
 export class PatientFormContainer extends PureComponent {
 
@@ -18,10 +25,16 @@ export class PatientFormContainer extends PureComponent {
     };
 
     containerProps() {
-        return {...this.props}
+        return { ...this.props }
     }
 
     async onSubmit(data) {
+        const { 
+            updatePatientsList, 
+            updateLoadStatus,
+            closeModal 
+        } = this.props;
+
         const { country, city, street, appartment, ...info } = data;
 
         const patientInfo = {
@@ -35,25 +48,27 @@ export class PatientFormContainer extends PureComponent {
 
         street && (patientInfo.address.street = street)
         street && (patientInfo.address.appartment = appartment)
-        console.log(patientInfo)
 
         try {
-            const res = await fetch("/api/patients", {
+            const response = await fetch("/api/patients", {
                 body: JSON.stringify(patientInfo),
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 method: 'POST'
             })
-
-            if (res.ok) {
-                console.log("ok", res)
+            updateLoadStatus(true);
+            if (response.ok) {
+                const data = await response.json()
+                updatePatientsList(data.patients);
+                closeModal();
+                updateLoadStatus(false);
             } else {
-                console.log(res)
+                console.log(response)
             }
 
         } catch(e) {
-            console.error("failed to fetch.");
+            console.error("failed to fetch.", e.stack);
         }
     }
 
@@ -67,4 +82,4 @@ export class PatientFormContainer extends PureComponent {
     }
 }
 
-export default PatientFormContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(PatientFormContainer);

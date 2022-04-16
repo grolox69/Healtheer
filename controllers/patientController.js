@@ -19,7 +19,9 @@ export const addPatient = async (req, res) => {
         User.findById(req.userId).then((user) => {
             user.patients.push(newPatient._id);
             user.save().then(() => {
-                res.status(200).send("Patient Successfully added.");
+                user.populate('patients').then((currentUser) => {
+                    res.status(200).json({ patients: currentUser.patients });
+                })
             })
         });
     }).catch((e) => {
