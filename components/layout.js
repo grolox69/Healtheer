@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Layout({ children }) {
     return (
-        <div className="min-h-full">
+        <div className="min-h-screen bg-[#f3f4f6]">
             <Head>
                 <title>Healtheer</title>
                 <link rel="icon" href="/favi.png" />

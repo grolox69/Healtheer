@@ -1,6 +1,4 @@
 import { PureComponent } from "react";
-import Layout from '../components/layout'
-import privateRoute from "../util/Auth/privateRoute"
 import {
   AcademicCapIcon,
   BadgeCheckIcon,
@@ -9,14 +7,6 @@ import {
   ReceiptRefundIcon,
   UsersIcon,
 } from '@heroicons/react/outline'
-
-const user = {
-  name: 'Chelsea Hagon',
-  email: 'chelsea.hagon@example.com',
-  role: 'Human Resources Manager',
-  imageUrl:
-    'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
 
 const actions = [
   {
@@ -61,9 +51,17 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export class Test extends PureComponent {
+function _calculateAge(birthday) { // birthday is a date
+  var ageDifMs = Date.now() - birthday.getTime();
+  var ageDate = new Date(ageDifMs); // miliseconds from epoch
+  return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
+
+export class PatientMonitor extends PureComponent {
 
   renderHeader() {
+    const { patient } = this.props;
+
     return (
       <section aria-labelledby="profile-overview-title">
         <div className="rounded-lg bg-white overflow-hidden shadow">
@@ -74,14 +72,18 @@ export class Test extends PureComponent {
             <div className="sm:flex sm:items-center sm:justify-between">
               <div className="sm:flex sm:space-x-5">
                 <div className="flex-shrink-0">
-                  <img className="mx-auto h-20 w-20 rounded-full" src={user.imageUrl} alt="" />
+                  <img className="mx-auto h-20 w-20 rounded-full" src={`https://avatars.dicebear.com/api/micah/${patient._id}.svg`} alt="" />
                 </div>
                 <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
                   <p className="text-xl font-bold text-gray-900">Patient</p>
-                  <p className="text-md font-medium text-gray-600 sm:text-2xl">{user.name}</p>
+                  <p className="text-md font-medium text-gray-600 sm:text-2xl">{patient.fullName}</p>
                 </div>
               </div>
-              <>| age...</>
+              <div className="grid">
+                <div>| age : {_calculateAge(new Date(patient.dateOfBirth))} years old</div>
+                <div>| gender: { patient.gender }</div>
+                <div>| emergency email: { patient.emergencyEmail }</div>
+              </div>
             </div>
           </div>
           
@@ -91,6 +93,8 @@ export class Test extends PureComponent {
   }
 
   renderAddress() {
+    const { patient: { address }} = this.props
+
     return (
       <section aria-labelledby="announcements-title">
         <div className="rounded-lg bg-white overflow-hidden shadow">
@@ -99,6 +103,10 @@ export class Test extends PureComponent {
               Personal Address
             </h2>
             <div className="flow-root mt-6">
+              <div>{ address.country }</div>
+              <div>{ address.city }</div>
+              <div>{ address.street }</div>
+              <div>{ address.appartment }</div>
               
             </div>
           </div>
@@ -180,25 +188,24 @@ export class Test extends PureComponent {
   }
     
   render() {
-    return (
-      <Layout>            
+    const { patient } = this.props;
+    console.log("pee ", patient)
+    return (     
         <div className="grid grid-cols-1 gap-4 items-start lg:grid-cols-3 lg:gap-8">
-          {/* Left column */}
-          <div className="grid grid-cols-1 gap-4 lg:col-span-2">
+            {/* Left column */}
+            <div className="grid grid-cols-1 gap-4 lg:col-span-2">
             { this.renderHeader() }
             { this.renderMonitorCards() }
-          </div>
+            </div>
 
-          {/* Right column */}
-          <div className="grid grid-cols-1 gap-4"> 
+            {/* Right column */}
+            <div className="grid grid-cols-1 gap-4"> 
             { this.renderAddress() }
             { this.renderComingSoon() }
-          </div>
+            </div>
         </div>
-      </Layout>
     );
-          
   }
 }
 
-export default  privateRoute(Test, { pathAfterFailure: '/' });
+export default PatientMonitor;

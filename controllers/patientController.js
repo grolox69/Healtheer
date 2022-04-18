@@ -40,3 +40,13 @@ export const deletePatient = async (req, res) => {
         res.status(500).send("Failed to delete patient.")
     }
 }
+
+export const getPatient = async (req, res) => {
+    try {
+        const patient = await Patient.findById(req.query.id);
+        res.status(200).json({ patient });
+    } catch (e) {
+        console.error("Failed to fetch patient ", e.stack);
+        res.status(500).send("Failed to fetch patient.")
+    }
+}

@@ -1,5 +1,6 @@
 import { PureComponent } from "react";
-import { PencilAltIcon } from '@heroicons/react/solid'
+import Link from 'next/link';
+import { PencilAltIcon, EyeIcon } from '@heroicons/react/solid'
 import { TrashIcon, LocationMarkerIcon, CalendarIcon } from "@heroicons/react/outline";
 
 function _calculateAge(birthday) { // birthday is a date
@@ -14,15 +15,22 @@ export class PatientCard extends PureComponent {
         const { patient } = this.props;
 
         return (
-            <div className="flex-1 flex flex-col p-8">
-                <img className="w-32 h-32 flex-shrink-0 mx-auto rounded-full" src={`https://avatars.dicebear.com/api/micah/${patient._id}.svg`} alt="Patient Avatar" />
-                <h3 className="mt-6 text-gray-900 text-sm font-medium">{patient.fullName}</h3>
-                <div className="mt-1 flex-grow flex flex-col justify-between space-y-2">
-                    <p className="flex items-center justify-center text-gray-500 text-sm"><LocationMarkerIcon className="h-4 w-4 mr-1" />{`${patient.address.country}, ${patient.address.city}`}</p>
-                    <p className="flex items-center justify-center text-gray-500 text-sm"><CalendarIcon className="h-4 w-4 mr-1"/>{ `${_calculateAge(new Date(patient.dateOfBirth))} years old` }</p>
-                    <div className="mt-3" />
-                </div>
-            </div>
+            <Link
+                href={`/patients/${patient._id}`}
+            >
+                <a>
+                    <div className="w-full flex justify-end"><EyeIcon className="absolute w-4 h-4 m-4" /></div>
+                    <div className="flex-1 flex flex-col p-8">
+                        <img className="w-32 h-32 flex-shrink-0 mx-auto rounded-full" src={`https://avatars.dicebear.com/api/micah/${patient._id}.svg`} alt="Patient Avatar" />
+                        <h3 className="mt-6 text-gray-900 text-sm font-medium">{patient.fullName}</h3>
+                        <div className="mt-1 flex-grow flex flex-col justify-between space-y-2">
+                            <p className="flex items-center justify-center text-gray-500 text-sm"><LocationMarkerIcon className="h-4 w-4 mr-1" />{`${patient.address.country}, ${patient.address.city}`}</p>
+                            <p className="flex items-center justify-center text-gray-500 text-sm"><CalendarIcon className="h-4 w-4 mr-1"/>{ `${_calculateAge(new Date(patient.dateOfBirth))} years old` }</p>
+                            <div className="mt-3" />
+                        </div>
+                    </div>
+                </a>
+            </Link>
         )
     }
 

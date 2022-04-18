@@ -2,7 +2,8 @@ import { createHandler } from "../../../util/ConnectHandler/createHandler";
 import isAuthed from "../../../middleware/isAuthed";
 
 import { 
-    deletePatient
+    deletePatient,
+    getPatient
 } from "../../../controllers/patientController"
 
 // @route /api/patients/:id
@@ -12,10 +13,9 @@ import {
 const handler = createHandler([isAuthed]);
 
 handler
-.get((req, res) => {
-    
-})
+.get(getPatient)
 .post((req, res) => {
+    console.log("POST /api/patients/:id - not implemented")
 })
 .delete(deletePatient)
 
