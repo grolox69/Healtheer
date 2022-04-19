@@ -19,7 +19,7 @@ export class PatientCard extends PureComponent {
                 href={`/patients/${patient._id}`}
             >
                 <a>
-                    <div className="w-full flex justify-end"><EyeIcon className="absolute w-4 h-4 m-4" /></div>
+                    <div className="w-full flex justify-end"><EyeIcon className="absolute w-12 h-12 p-4" /></div>
                     <div className="flex-1 flex flex-col p-8">
                         <img className="w-32 h-32 flex-shrink-0 mx-auto rounded-full" src={`https://avatars.dicebear.com/api/micah/${patient._id}.svg`} alt="Patient Avatar" />
                         <h3 className="mt-6 text-gray-900 text-sm font-medium">{patient.fullName}</h3>

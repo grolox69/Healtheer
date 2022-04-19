@@ -7,6 +7,7 @@ import {
   ReceiptRefundIcon,
   UsersIcon,
 } from '@heroicons/react/outline'
+import SimpleLoader from "../SimpleLoader"
 
 const actions = [
   {
@@ -58,6 +59,10 @@ function _calculateAge(birthday) { // birthday is a date
 }
 
 export class PatientMonitor extends PureComponent {
+
+  renderLoading() {
+    return <SimpleLoader />
+  }
 
   renderHeader() {
     const { patient } = this.props;
@@ -188,8 +193,11 @@ export class PatientMonitor extends PureComponent {
   }
     
   render() {
-    const { patient } = this.props;
-    console.log("pee ", patient)
+    const { isLoading } = this.props
+        
+    if (isLoading) {
+      return this.renderLoading();
+    }
     return (     
         <div className="grid grid-cols-1 gap-4 items-start lg:grid-cols-3 lg:gap-8">
             {/* Left column */}
