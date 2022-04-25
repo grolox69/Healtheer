@@ -79,15 +79,24 @@ export class PatientMonitor extends PureComponent {
                 <div className="flex-shrink-0">
                   <img className="mx-auto h-20 w-20 rounded-full" src={`https://avatars.dicebear.com/api/micah/${patient._id}.svg`} alt="" />
                 </div>
-                <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
-                  <p className="text-xl font-bold text-gray-900">Patient</p>
-                  <p className="text-md font-medium text-gray-600 sm:text-2xl">{patient.fullName}</p>
+                <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left mb-4 md:mb-0">
+                  <p className="text-2xl font-bold text-gray-900">Patient</p>
+                  <p className="md:text-4xl font-medium text-gray-600 text-3xl">{patient.fullName}</p>
                 </div>
               </div>
-              <div className="grid">
-                <div>| age : {_calculateAge(new Date(patient.dateOfBirth))} years old</div>
-                <div>| gender: { patient.gender }</div>
-                <div>| emergency email: { patient.emergencyEmail }</div>
+              <div className="grid text-center md:text-left md:border-l-2 pl-8">
+                <div className="text-lg font-semibold">
+                  Age : 
+                  <span className="text-md font-thin text-gray-500 ml-2">{_calculateAge(new Date(patient.dateOfBirth))} years old</span>
+                </div>
+                <div className="text-lg font-semibold">
+                  Gender: 
+                  <span className="text-md font-thin text-gray-500 ml-2">{ patient.gender }</span>
+                </div>
+                <div className="text-lg font-semibold">
+                  Emergency Email: 
+                  <span className="text-md font-thin text-gray-500 ml-2"><a href={`mailto:${patient.emergencyEmail}`}>{ patient.emergencyEmail }</a></span>
+                </div>
               </div>
             </div>
           </div>
@@ -104,15 +113,18 @@ export class PatientMonitor extends PureComponent {
       <section aria-labelledby="announcements-title">
         <div className="rounded-lg bg-white overflow-hidden shadow">
           <div className="p-6">
-            <h2 className="text-base font-medium text-gray-900" id="announcements-title">
+            <h2 className="text-2xl font-bold text-gray-700 text-center" id="announcements-title">
               Personal Address
             </h2>
-            <div className="flow-root mt-6">
-              <div>{ address.country }</div>
-              <div>{ address.city }</div>
-              <div>{ address.street }</div>
-              <div>{ address.appartment }</div>
-              
+            <div className="flow-root mt-4">
+              <span className="text-xl font-semibold">Country</span>
+              <div className="text-md text-gray-500 mb-2">{ address.country }</div>
+              <span className="text-xl font-semibold">City</span>
+              <div className="text-md text-gray-500 mb-2">{ address.city }</div>
+              <span className="text-xl font-semibold">Street</span>
+              <div className="text-md text-gray-500 mb-2">{ address.street || 'Unspecified' }</div>
+              <span className="text-xl font-semibold">Appartment</span>
+              <div className="text-md text-gray-500 mb-2">{ address.appartment || 'Unspecified' }</div>
             </div>
           </div>
         </div>
