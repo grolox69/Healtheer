@@ -1,15 +1,13 @@
 import { createHandler } from "../../../util/ConnectHandler/createHandler";
+import { updatePatientData } from "../../../controllers/patientDataController";
 
-// @route /api/data
-// @desc GET arduino's data
+// @route /api/data/:id
+// @desc Update Patient's Data
 // @access Private
 
 const handler = createHandler();
 
 handler
-.post((req, res) => {
-    // Add data to DB using PatientModel Schema
-    res.json({ msg: 'Felefly byeklo'})
-})
+.put(updatePatientData)
 
 export default handler;
