@@ -9,6 +9,6 @@ export const updatePatientData = async (req, res) => {
         res.status(200).json({ patientData });
     } catch (e) {
         console.error("Failed to update patient data.", e.stack);
-        res.status(500).send("Failed to update patient data.")
+        res.status(500).send("Failed to update patient data.");
     }
 }

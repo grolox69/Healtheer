@@ -5,7 +5,19 @@ export const patientDataSchema =  new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'Patient'
     },
-    health: {
+    bodyTemperature: {
+        type: Number,
+        required: true
+    },
+    roomTemperature: {
+        type: Number,
+        required: true
+    },
+    heartRate: {
+        type: Number,
+        required: true
+    },
+    alarmFlag: {
         type: Number,
         required: true
     }

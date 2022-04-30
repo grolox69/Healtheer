@@ -37,10 +37,9 @@ export class PatientCardContainer extends PureComponent {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
         })
-        console.log(response)
+        
         if (response.ok) {
-            const data = await response.json()
-            console.log("done ", data.patients)
+            const data = await response.json();
             updatePatientList(data.patients);
             updateLoadStatus(false);
             toast.success('Patient Removed!');

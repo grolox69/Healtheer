@@ -38,7 +38,6 @@ async function mongooseConnectMiddleware(req, res, next) {
               'data-update', 
               updatedData
             );
-            console.log("update triggered")
           }
         });
       })

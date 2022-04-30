@@ -16,7 +16,7 @@ export const mapDispatchToProps = (dispatch) => ({
 export class PatientsPageContainer extends PureComponent {
 
     state = {
-        health: 0
+        data: 'Device not connected'
     }
 
     componentDidMount() {
@@ -25,15 +25,15 @@ export class PatientsPageContainer extends PureComponent {
                 cluster: "ap2",
             });
             this.channel = this.pusher.subscribe('patientData');
-            this.channel.bind('data-update', (e) => this.updateHealth(e.health));
+            this.channel.bind('data-update', (e) => this.updateData(e));
         } catch(e) {
             console.log(e)
         }
     }
 
-    updateHealth(newHealth) {
+    updateData(newData) {
         this.setState({
-            health: newHealth
+            data: newData
         })
     }
 

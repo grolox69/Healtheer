@@ -66,8 +66,7 @@ export class PatientFormContainer extends PureComponent {
                 updateLoadStatus(false);
                 toast.success('Patient Added!');
             } else {
-                console.log(response);
-                toast.success('Failed to add patient!');
+                toast.error('Failed to add patient!');
             }
 
         } catch(e) {
