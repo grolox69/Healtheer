@@ -6,7 +6,7 @@ export class MonitorCard extends PureComponent {
         const { sensor: { title } } = this.props;
 
         return (
-            <h1 className="text-3xl mb-1 text-gray-700 capitalize">
+            <h1 className="text-3xl mb-1 font-semibold text-center text-gray-700 capitalize">
                { title }
             </h1>
         )
@@ -15,9 +15,7 @@ export class MonitorCard extends PureComponent {
     renderIcon() {
         const { sensor: { icon } } = this.props;
         
-        return (
-            icon.content
-        )
+        return icon;
     }
 
     renderData() {
@@ -27,7 +25,7 @@ export class MonitorCard extends PureComponent {
         
         return (
             <span 
-                className={`text-red-500 ${size} font-bold`}
+                className={`text-red-400 ${size} font-bold pt-1 text-center`}
             >
                 { dataToDisplay }
             </span>
@@ -46,14 +44,11 @@ export class MonitorCard extends PureComponent {
 
     render() {
         return (
-            
-            <div className="max-w-sm p-8 border-2 border-blue-300 rounded-xl">
-                <div className="flex space-x-2 items-center justify-center">
+            <div className="max-w-sm p-2 border-2 border-[#643A6A] rounded-xl py-4">
+                <div className="flex justify-end px-2">
                     {this.renderIcon()}
-
-                    {this.renderTitle()}
                 </div>
-
+                {this.renderTitle()}
                 <div className="flex items-center justify-center text-gray-300 h-32 text-7xl">
                     {this.renderData()}
                     {this.renderUnit()}

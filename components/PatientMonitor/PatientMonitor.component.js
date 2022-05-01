@@ -87,11 +87,13 @@ export class PatientMonitor extends PureComponent {
   renderMonitorCards() {
     const { data } = this.props;
     return (
-      <>
-        { sensorsMap.map((sensor, i) => (
-          <MonitorCard key={i} sensor={sensor} data={data} />
-        ))}
-      </>
+      <div>
+        <div className="grid grid-cols-1 gap-y-4 md:grid-cols-3 md:space-x-2">
+          { sensorsMap.map((sensor, i) => (
+            <MonitorCard key={i} sensor={sensor} data={data} />
+          ))}
+        </div>
+      </div>
     )
   }
 
@@ -112,19 +114,19 @@ export class PatientMonitor extends PureComponent {
       return this.renderLoading();
     }
     return (     
-        <div className="grid grid-cols-1 gap-4 items-start lg:grid-cols-3 lg:gap-8">
-            {/* Left column */}
-            <div className="grid grid-cols-1 gap-4 lg:col-span-2">
-            { this.renderHeader() }
-            { this.renderMonitorCards() }
-            </div>
-
-            {/* Right column */}
-            <div className="grid grid-cols-1 gap-4"> 
-            { this.renderAddress() }
-            { this.renderComingSoon() }
-            </div>
+      <div className="grid grid-cols-1 gap-4 items-start lg:grid-cols-3 lg:gap-8">
+        {/* Left column */}
+        <div className="grid grid-cols-1 gap-4 lg:col-span-2">
+          { this.renderHeader() }
+          { this.renderMonitorCards() }
         </div>
+
+        {/* Right column */}
+        <div className="grid grid-cols-1 gap-4"> 
+          { this.renderAddress() }
+          { this.renderComingSoon() }
+        </div>
+      </div>
     );
   }
 }
