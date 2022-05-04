@@ -36,6 +36,8 @@ export class PatientFormContainer extends PureComponent {
             closeModal 
         } = this.props;
 
+        closeModal();
+
         const { country, city, street, appartment, ...info } = data;
 
         const patientInfo = {
@@ -62,11 +64,11 @@ export class PatientFormContainer extends PureComponent {
             if (response.ok) {
                 const data = await response.json()
                 updatePatientList(data.patients);
-                closeModal();
-                updateLoadStatus(false);
                 toast.success('Patient Added!');
+                updateLoadStatus(false);
             } else {
                 toast.error('Failed to add patient!');
+                updateLoadStatus(false);
             }
 
         } catch(e) {

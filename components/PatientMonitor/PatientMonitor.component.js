@@ -85,12 +85,12 @@ export class PatientMonitor extends PureComponent {
   }
 
   renderMonitorCards() {
-    const { data } = this.props;
+    const { data, patient } = this.props;
     return (
       <div>
         <div className="grid grid-cols-1 gap-y-4 md:grid-cols-3 md:space-x-2">
           { sensorsMap.map((sensor, i) => (
-            <MonitorCard key={i} sensor={sensor} data={data} />
+            <MonitorCard key={i} sensor={sensor} data={data} patient={patient} />
           ))}
         </div>
       </div>
@@ -106,6 +106,24 @@ export class PatientMonitor extends PureComponent {
       </div>
     )
   }
+
+  renderAlert() {
+    const { data: { alarmFlag, patient }, patient: { _id } } = this.props;
+
+    if ( patient != _id ) {
+      return ''
+    }
+    
+    if (!alarmFlag || alarmFlag === 0) {
+      return ''
+    }
+
+    return (
+      <span className="text-center text-3xl text-red-600 font-bold">
+          Your patient is in a Critical Condition.
+      </span>
+    )
+}
     
   render() {
     const { isLoading } = this.props
@@ -119,6 +137,7 @@ export class PatientMonitor extends PureComponent {
         <div className="grid grid-cols-1 gap-4 lg:col-span-2">
           { this.renderHeader() }
           { this.renderMonitorCards() }
+          { this.renderAlert() }
         </div>
 
         {/* Right column */}

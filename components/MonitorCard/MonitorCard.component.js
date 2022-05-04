@@ -6,7 +6,7 @@ export class MonitorCard extends PureComponent {
         const { sensor: { title } } = this.props;
 
         return (
-            <h1 className="text-3xl mb-1 font-semibold text-center text-gray-700 capitalize">
+            <h1 className="h-16 text-3xl mb-1 font-semibold text-center text-gray-700 capitalize">
                { title }
             </h1>
         )
@@ -19,9 +19,19 @@ export class MonitorCard extends PureComponent {
     }
 
     renderData() {
-        const { data, sensor: { id } } = this.props;
+        const { data, sensor: { id }, patient } = this.props;
         const size = typeof data === 'string' ? 'text-lg' : 'text-2xl'
         const dataToDisplay = typeof data === 'string' ? data : data[id]
+
+        if (data.patient != patient._id) {
+            return (
+                <span 
+                    className='text-red-400 text-lg font-bold pt-1 text-center'
+                >
+                    Device not connected
+                </span>
+            )
+        }
         
         return (
             <span 
@@ -33,11 +43,12 @@ export class MonitorCard extends PureComponent {
     }
 
     renderUnit() {
-        const { sensor: { unit } } = this.props;
+        const { data, sensor: { unit } } = this.props;
+        const unitToDisplay = typeof data === 'string' ? '' : unit
 
         return (
             <span className="text-2xl text-black font-semibold pl-3">
-                { unit }
+                { unitToDisplay }
             </span>
         )
     }
@@ -49,11 +60,10 @@ export class MonitorCard extends PureComponent {
                     {this.renderIcon()}
                 </div>
                 {this.renderTitle()}
-                <div className="flex items-center justify-center text-gray-300 h-32 text-7xl">
+                <div className="h-36 flex items-center justify-center text-gray-300 text-7xl">
                     {this.renderData()}
                     {this.renderUnit()}
                 </div>
-
             </div>      
             
         )
