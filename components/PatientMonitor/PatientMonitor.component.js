@@ -34,6 +34,7 @@ export class PatientMonitor extends PureComponent {
                 <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left mb-4 md:mb-0">
                   <p className="text-2xl font-bold text-gray-900">Patient</p>
                   <p className="md:text-4xl font-medium text-gray-600 text-3xl">{patient.fullName}</p>
+                  <p className="md:text-2xl font-semibold text-gray-400 text-xl">{patient._id}</p>
                 </div>
               </div>
               <div className="grid text-center md:text-left md:border-l-2 pl-8">
